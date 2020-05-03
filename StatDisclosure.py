@@ -58,7 +58,7 @@ class StatDisclosure:
         result = np.subtract(result, np.multiply((self.batchSize - 1), \
                  self.trafficGenerator.get_traffic_prob_vec()))
                     
-        print(result)
+        self.print_result(result)
         return
         
         
@@ -77,7 +77,7 @@ class StatDisclosure:
             
         """
         
-        result = np.empty(self.trafficGenerator.get_num_of_recievers())
+        result = np.empty(self.trafficGenerator.get_num_of_receivers())
         
         for vec in vectors:
            result = np.add(result, vec)
@@ -106,3 +106,34 @@ class StatDisclosure:
             
         return result
         
+    def print_result(self, result):
+        """Nicley print result for users
+
+        Args:
+            self (int): The object calling this method
+            result (np.array[]) : vector containing the probability distribution
+                                  from performing the attack
+
+        Returns:
+            void
+            
+        """
+        
+        outputString = 'The target of this attack was : '
+        outputString += self.trafficGenerator.get_target()
+        outputString += '\nThe targets receiver was : '
+        outputString += self.trafficGenerator.get_target_receiver()
+        outputString += '\nThe number of senders on the network was : '
+        outputString += str(self.trafficGenerator.get_num_of_senders())
+        outputString += '\nthe list of senders on the network was : '
+        outputString += self.trafficGenerator.print_senders()
+        outputString += '\nThe number of receivers on the network was : '
+        outputString += str(self.trafficGenerator.get_num_of_receivers())
+        outputString += '\nThe list of recipients was : '
+        outputString += self.trafficGenerator.print_receivers()
+        outputString += '\nThe number of iterations the attack was run was : '
+        outputString += str(self.numOfIterations)
+        outputString += '\nThe result of the attack was : '
+        outputString += self.trafficGenerator.print_receivers(result)
+        
+        print(outputString)

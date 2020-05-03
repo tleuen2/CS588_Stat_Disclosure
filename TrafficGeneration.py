@@ -11,7 +11,7 @@ from random import random
 
 class TrafficGenerator:
     
-    def __init__(self, senders, receivers, target, targetsReceivers):
+    def __init__(self, senders, receivers, targetInput, targetsReceivers):
         """Constructor for TrafficGenerator.
 
         The constructor for TrafficGenerator will prepare internal data members
@@ -29,14 +29,15 @@ class TrafficGenerator:
             
         """
         self.sendersList = senders
-        self.receiverList = receivers
+        self.receiverList = senders + receivers
         self.targetReceiverList = targetsReceivers
         self.numOfSenders = len(senders)
-        self.numOfRecievers = len(receivers)
+        self.numOfRecievers = len(self.receiverList)
         self.numOfTargetsReceivers = len(targetsReceivers)
         self.targetProbVector = self.build_target_vector()
         self.trafficProbVector = self.build_traffic_vector()
         self.outputVector = np.array([])
+        self.target = targetInput
         
     def build_target_vector(self):
         """Builds a vector of propbabilites representing who the victim is most
@@ -198,7 +199,7 @@ class TrafficGenerator:
         
         return self.trafficProbVector
         
-    def get_num_of_recievers(self):
+    def get_num_of_receivers(self):
         """Gets the number of receivers on the network
         
         Args:
@@ -210,3 +211,90 @@ class TrafficGenerator:
             
         """
         return self.numOfRecievers
+        
+    def get_target(self):
+        """Gets the target of the attack
+        
+        Args:
+            void
+            depends on class members
+
+        Returns:
+            string : containing the target of the attack
+            
+        """
+        
+        # At the moment we only use one target
+        return self.target[0]
+        
+    def get_target_receiver(self):
+        """Gets the targets recevier
+        
+        Args:
+            void
+            depends on class members
+
+        Returns:
+            string : containing the targets reciever
+            
+        """
+        
+        # At the moment we only use one reciever for the target
+        return self.targetReceiverList[0]
+        
+        
+    def get_num_of_senders(self):
+        """Gets the number of senders on the network
+        
+        Args:
+            void
+            depends on class members
+
+        Returns:
+            int : containing the number of senders
+            
+        """
+        return self.numOfSenders
+        
+    def print_receivers(self, prob = []):
+        """Prints the receivers on the network
+        
+        Args:
+            self (int): The object calling this method
+            Optional prob (float[]) : The probability that each reciever is 
+                                      the target's reciever
+
+        Returns:
+            string of the formatted output
+            
+        """
+        
+        count = 0
+        outputString = '\n----------------------------\n'
+        for receiver in self.receiverList:
+            outputString += receiver
+            if prob != []:
+                outputString += ' : ' 
+                outputString += str(prob[count])
+                count += 1
+            outputString += '\n'
+        outputString += '----------------------------\n'
+        return outputString
+        
+    def print_senders(self):
+        """Prints the senders on the network
+        
+        Args:
+            self (int): The object calling this method
+
+        Returns:
+            string of the formatted output
+            
+        """
+        outputString = '\n----------------------------\n'
+        for sender in self.sendersList:
+            outputString += sender
+            outputString += '\n'
+        outputString += '----------------------------\n'
+        return outputString
+                

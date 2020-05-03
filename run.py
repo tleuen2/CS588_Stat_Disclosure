@@ -14,11 +14,11 @@ import TrafficGeneration
 print('Now Starting Test Run')
 
 mySenders = ['Beth', 'Bill', 'Clair', 'Charles']
-myRecievers = ['Frank', 'Greg', 'Steven', 'Tyler']
+myRecievers = ['Frank', 'Greg', 'Steven', 'Tyler', 'Ned', 'Bob', 'Stacey']
 myTarget = ['Beth']
 myTargetsReciever = ['Greg']
 myBatchSize = 4 # num of senders
-myNumOfIterations = 100000
+myNumOfIterations = 1000
  
 myTraffic = TrafficGeneration.TrafficGenerator(mySenders, myRecievers,\
                 myTarget, myTargetsReciever)
