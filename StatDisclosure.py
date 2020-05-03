@@ -48,11 +48,15 @@ class StatDisclosure:
         """
         
         observations = self.generate_traffic()
+        #print ('This is my obersevation vectors\n', observations)
         summationOfObservations = self.sum_vectors(observations)
-        result = self.batchSize * (summationOfObservations \
-                                    / self.numOfIterations)
-        result -= np.multiply((self.batchSize - 1), \
-                    self.trafficGenerator.get_traffic_prob_vec())
+        #print('\nThis is my summation of observations\n', summationOfObservations)
+        result = np.multiply(self.batchSize, \
+                 (np.divide(summationOfObservations, \
+                 self.numOfIterations)))
+        #print('\nThis is my partial result\n', result)
+        result = np.subtract(result, np.multiply((self.batchSize - 1), \
+                 self.trafficGenerator.get_traffic_prob_vec()))
                     
         print(result)
         return
@@ -76,7 +80,7 @@ class StatDisclosure:
         result = np.empty(self.trafficGenerator.get_num_of_recievers())
         
         for vec in vectors:
-            np.add(result, vec)
+           result = np.add(result, vec)
             
         return result
         
@@ -97,7 +101,7 @@ class StatDisclosure:
         
         result = []
         
-        for i in range(self.batchSize):
+        for i in range(self.numOfIterations):
             result.append(self.trafficGenerator.generate_observation())
             
         return result

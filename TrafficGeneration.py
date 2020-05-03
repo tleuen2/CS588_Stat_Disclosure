@@ -74,6 +74,7 @@ class TrafficGenerator:
                 targetProbs[count] = 0
                 count += 1
             
+        #print ('This is the target probability vector\n', targetProbs)
         return targetProbs
         
     def build_traffic_vector(self):
@@ -108,6 +109,7 @@ class TrafficGenerator:
             targetProbs[count] = initialProbability
             count += 1
             
+        #print ('This is the traffic probability vector\n', targetProbs)
         return targetProbs
     
     def set_target_vector(self, newVector):
@@ -126,6 +128,13 @@ class TrafficGenerator:
         """Generates an observation of one iteration of communication on the 
             network
             
+        The observation is a probability distribution. Each entry is the chance
+        that the recipient at that entry is the target's receiver. The output
+        must sum to 1 as it is a probability distribution. 
+        
+        Currently we are limited to only one target. This could be an 
+        improvement for later work
+        
         Args:
             void
             depends on class members
@@ -138,23 +147,41 @@ class TrafficGenerator:
         
         output = np.empty(len(self.receiverList))
         count = 0
+        coutn2 = 0
         
-        # seed random number generator
-        seed(1)
+        # in order to create random traffic, we use a list of randomly generated
+        # numbers between 0 and 1. Each of these number respresents the chance
+        # that the recipient is the target's reciepient. 
+        dist = np.random.random(self.numOfRecievers)
         
-        # generate random numbers between 0-1
+        # In oder to ensure that the observation vector sums to 1. Remeber that
+        # this vector IS a probability disribution. It is generated randomly, 
+        # and likely doesn't fit any known distribution, but that is okay. 
+        # traffic on a network is highly sporatic
+        normalizing_cosnt = np.sum(dist)
+        dist = np.divide(dist, normalizing_cosnt)
+        
+        # We will assign the maximum likelihood in the distribution to the 
+        # target's true recipient. 
+        max_value = np.amax(dist)
+        max_index = np.where(dist == max_value)
+        
+        # To make like easier later - remove the value from the distribution.
+        # This is so that we can just iterate over the distribution without 
+        # worrying about other recievers getting the maximum value
+        dist = np.delete(dist, max_index[0][0])
+        
+        # Assign probabilities to receivers on the network
         for receiver in self.receiverList:
-            value = random()
-            # If this is not that target's receipient then multiply the 
-            # probability by a random multiplier to make it less likely that 
-            # the current receipient is communicating with the target
             if receiver not in self.targetReceiverList:
-                multiplier = random()
-                value *= multiplier
+                value = dist[count]
+                count += 1
+            else:
+                # the true reciever gets the maximum value
+                value = max_value
+            output[coutn2] = value
+            coutn2 += 1
             
-            output[count] = value
-            count += 1
-        
         return output
         
     def get_traffic_prob_vec(self):
