@@ -125,7 +125,7 @@ class TrafficGenerator:
             
         Args:
             void
-            depends on class memebers
+            depends on class members
 
         Returns:
             np.array : (vector) representing the observation of one iteration 
@@ -152,3 +152,17 @@ class TrafficGenerator:
             output[count++] = value
         
         return output
+        
+    def get_traffic_prob_vec(self):
+        """Gets trafficProbVector
+        
+        Args:
+            void
+            depends on class members
+
+        Returns:
+            np.array : containing the class's traffic probability vector
+            
+        """
+        
+        return self.trafficProbVector
