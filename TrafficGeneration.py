@@ -34,8 +34,8 @@ class TrafficGenerator:
         self.numOfSenders = len(senders)
         self.numOfRecievers = len(receivers)
         self.numOfTargetsReceivers = len(targetsReceivers)
-        self.targetProbVector = build_target_vector()
-        self.trafficProbVector = build_traffic_vector()
+        self.targetProbVector = self.build_target_vector()
+        self.trafficProbVector = self.build_traffic_vector()
         self.outputVector = np.array([])
         
     def build_target_vector(self):
@@ -59,7 +59,7 @@ class TrafficGenerator:
             
         """
         
-        targetProbs = np.array([])
+        targetProbs = np.empty(len(self.receiverList))
         count = 0
         
         # At the start we just assign all recievers as equally likely
@@ -68,9 +68,11 @@ class TrafficGenerator:
         # Potential improvement : use dictionary rather than implicit indexing
         for receiver in self.receiverList:
             if receiver in self.targetReceiverList:
-                targetProbs[count++] = initialProbability
+                targetProbs[count] = initialProbability
+                count += 1
             else:
-                targetProbs[count++] = 0
+                targetProbs[count] = 0
+                count += 1
             
         return targetProbs
         
@@ -95,7 +97,7 @@ class TrafficGenerator:
             
         """
         
-        targetProbs = np.array([])
+        targetProbs = np.empty(len(self.receiverList))
         count = 0
         
         # At the start we just assign all recievers as equally likely
@@ -103,7 +105,8 @@ class TrafficGenerator:
         
         # Potential improvement : use dictionary rather than implicit indexing
         for receiver in self.receiverList:
-            targetProbs[count++] = initialProbability
+            targetProbs[count] = initialProbability
+            count += 1
             
         return targetProbs
     
@@ -133,7 +136,7 @@ class TrafficGenerator:
             
         """
         
-        output = np.array([])
+        output = np.empty(len(self.receiverList))
         count = 0
         
         # seed random number generator
@@ -149,7 +152,8 @@ class TrafficGenerator:
                 multiplier = random()
                 value *= multiplier
             
-            output[count++] = value
+            output[count] = value
+            count += 1
         
         return output
         
@@ -166,3 +170,16 @@ class TrafficGenerator:
         """
         
         return self.trafficProbVector
+        
+    def get_num_of_recievers(self):
+        """Gets the number of receivers on the network
+        
+        Args:
+            void
+            depends on class members
+
+        Returns:
+            int : containing the number of receivers
+            
+        """
+        return self.numOfRecievers

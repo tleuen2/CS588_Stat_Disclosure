@@ -3,7 +3,7 @@
 # date: 04/25/2020
 # username: tleuen2
 # name: Thomas Leuenberger
-# description: traffic generation simulator
+# description: statistical disclosure implementation 
 
 import numpy as np
 from random import seed
@@ -47,13 +47,14 @@ class StatDisclosure:
             
         """
         
-        observations = generate_traffic()
-        summationOfObservations = sum_vectors(observations)
-        result = self.batchSize * (summationOfObservations / numOfIterations)
+        observations = self.generate_traffic()
+        summationOfObservations = self.sum_vectors(observations)
+        result = self.batchSize * (summationOfObservations \
+                                    / self.numOfIterations)
         result -= np.multiply((self.batchSize - 1), \
                     self.trafficGenerator.get_traffic_prob_vec())
                     
-        print result
+        print(result)
         return
         
         
@@ -72,7 +73,7 @@ class StatDisclosure:
             
         """
         
-        result = np.array([])
+        result = np.empty(self.trafficGenerator.get_num_of_recievers())
         
         for vec in vectors:
             np.add(result, vec)
