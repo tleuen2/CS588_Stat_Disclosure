@@ -15,9 +15,9 @@ print('Now Starting Test Run')
 
 mySenders = ['Beth', 'Bill', 'Clair', 'Charles']
 myRecievers = ['Frank', 'Greg', 'Steven', 'Tyler', 'Ned', 'Bob', 'Stacey']
-myTarget = ['Beth'] # Only one target allowed
+myTarget = 'Beth' # Only one target allowed
 myTargetsReciever = ['Frank', 'Bob']
-myBatchSize = 4 # num of senders
+myBatchSize = len(mySenders)
 myNumOfIterations = 100000
 myNumOfTargetMessagesPerRound = 2
  
