@@ -243,7 +243,7 @@ class TrafficGenerator:
         """
         
         # At the moment we only use one target
-        return self.target[0]
+        return self.target
         
     def get_target_receiver(self):
         """Gets the targets recevier
@@ -256,9 +256,13 @@ class TrafficGenerator:
             string : containing the targets reciever
             
         """
-        
+        outputString = ""
+        for reciever in self.targetReceiverList:
+            outputString += reciever
+            outputString += ', '
+        outputString = outputString[:-2]
         # At the moment we only use one reciever for the target
-        return self.targetReceiverList[0]
+        return outputString
         
         
     def get_num_of_senders(self):
@@ -309,7 +313,7 @@ class TrafficGenerator:
                 outputString += str(prob[count])
                 count += 1
             outputString += '\n'
-        outputString += '----------------------------\n'
+        outputString += '----------------------------'
         return outputString
         
     def print_senders(self):
@@ -326,6 +330,6 @@ class TrafficGenerator:
         for sender in self.sendersList:
             outputString += sender
             outputString += '\n'
-        outputString += '----------------------------\n'
+        outputString += '----------------------------'
         return outputString
                 

@@ -126,11 +126,11 @@ class StatDisclosure:
         
         outputString = 'The target of this attack was : '
         outputString += self.trafficGenerator.get_target()
-        outputString += '\nThe targets receiver was : '
+        outputString += '\nThe targets receiver(s) was(were) : '
         outputString += self.trafficGenerator.get_target_receiver()
         outputString += '\nThe number of senders on the network was : '
         outputString += str(self.trafficGenerator.get_num_of_senders())
-        outputString += '\nthe list of senders on the network was : '
+        outputString += '\nThe list of senders on the network was : '
         outputString += self.trafficGenerator.print_senders()
         outputString += '\nThe number of receivers on the network was : '
         outputString += str(self.trafficGenerator.get_num_of_receivers())
