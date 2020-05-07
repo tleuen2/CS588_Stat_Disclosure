@@ -50,6 +50,7 @@ simulation parameters)
     The target of this attack was : Beth
     The targets receiver(s) was(were) : Frank, Bob
     The number of senders on the network was : 4
+    The number of messages sent by that target each round was : 2
     The list of senders on the network was :
     ----------------------------
     Beth

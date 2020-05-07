@@ -130,6 +130,10 @@ class StatDisclosure:
         outputString += self.trafficGenerator.get_target_receiver()
         outputString += '\nThe number of senders on the network was : '
         outputString += str(self.trafficGenerator.get_num_of_senders())
+        outputString += '\nThe number of messages sent by that target each ' \
+                        + 'round was : '
+        outputString += str( \
+                self.trafficGenerator.get_num_of_messages_sent_by_target())
         outputString += '\nThe list of senders on the network was : '
         outputString += self.trafficGenerator.print_senders()
         outputString += '\nThe number of receivers on the network was : '
