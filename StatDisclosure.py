@@ -48,16 +48,21 @@ class StatDisclosure:
         """
         
         observations = self.generate_traffic()
-        #print ('This is my obersevation vectors\n', observations)
+        messagesPerRound = \
+                    self.trafficGenerator.get_num_of_messages_sent_by_target()
+        
         summationOfObservations = self.sum_vectors(observations)
-        #print('\nThis is my summation of observations\n', summationOfObservations)
+
         result = np.multiply(self.batchSize, \
                  (np.divide(summationOfObservations, \
                  self.numOfIterations)))
-        #print('\nThis is my partial result\n', result)
-        result = np.subtract(result, np.multiply((self.batchSize - 1), \
+
+        result = np.subtract(result, \
+                 np.multiply((self.batchSize - messagesPerRound), \
                  self.trafficGenerator.get_traffic_prob_vec()))
                     
+        result = np.divide(result, messagesPerRound)
+        
         self.print_result(result)
         return
         

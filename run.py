@@ -16,10 +16,10 @@ print('Now Starting Test Run')
 mySenders = ['Beth', 'Bill', 'Clair', 'Charles']
 myRecievers = ['Frank', 'Greg', 'Steven', 'Tyler', 'Ned', 'Bob', 'Stacey']
 myTarget = ['Beth'] # Only one target allowed
-myTargetsReciever = ['Greg', 'Steven']
+myTargetsReciever = ['Frank', 'Bob']
 myBatchSize = 4 # num of senders
-myNumOfIterations = 10000
-myNumOfTargetMessagesPerRound = 1
+myNumOfIterations = 100000
+myNumOfTargetMessagesPerRound = 2
  
 myTraffic = TrafficGeneration.TrafficGenerator(mySenders, myRecievers,\
                 myTarget, myTargetsReciever, myNumOfTargetMessagesPerRound)

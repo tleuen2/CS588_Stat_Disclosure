@@ -69,9 +69,6 @@ class TrafficGenerator:
         count = 0
         count2 = 0
         
-        # At the start we just assign all recievers as equally likely
-        initialProbability = 1 / self.numOfTargetsReceivers
-        
         # Potential improvement : use dictionary rather than implicit indexing
         for receiver in self.receiverList:
             if receiver in self.targetReceiverList:
@@ -111,7 +108,6 @@ class TrafficGenerator:
         
         dist = self.generate_random_distribution(len(self.receiverList))
             
-        #print ('This is the traffic probability vector\n', targetProbs)
         return dist
     
     def set_target_vector(self, newVector):
@@ -277,6 +273,19 @@ class TrafficGenerator:
             
         """
         return self.numOfSenders
+        
+    def get_num_of_messages_sent_by_target(self):
+        """Gets the number messages sent by the target per round
+        
+        Args:
+            void
+            depends on class members
+
+        Returns:
+            int : containing the number messages sent by the target per round
+            
+        """
+        return self.numOfTargetMessagesPerRound
         
     def print_receivers(self, prob = []):
         """Prints the receivers on the network
