@@ -305,7 +305,7 @@ class TrafficGenerator:
         """
         
         count = 0
-        outputString = '\n----------------------------\n'
+        outputString = '\n************************************\n'
         for receiver in self.receiverList:
             outputString += receiver
             if prob != []:
@@ -313,7 +313,7 @@ class TrafficGenerator:
                 outputString += str(prob[count])
                 count += 1
             outputString += '\n'
-        outputString += '----------------------------'
+        outputString += '************************************'
         return outputString
         
     def print_senders(self):
@@ -326,10 +326,10 @@ class TrafficGenerator:
             string of the formatted output
             
         """
-        outputString = '\n----------------------------\n'
+        outputString = '\n************************************\n'
         for sender in self.sendersList:
             outputString += sender
             outputString += '\n'
-        outputString += '----------------------------'
+        outputString += '************************************'
         return outputString
                 
