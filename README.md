@@ -52,15 +52,15 @@ simulation parameters)
     The number of senders on the network was : 4
     The number of messages sent by that target each round was : 2
     The list of senders on the network was :
-    ----------------------------
+    ************************************
     Beth
     Bill
     Clair
     Charles
-    ----------------------------
+    ************************************
     The number of receivers on the network was : 11
     The list of recipients was :
-    ----------------------------
+    ************************************
     Beth
     Bill
     Clair
@@ -72,10 +72,10 @@ simulation parameters)
     Ned
     Bob
     Stacey
-    ----------------------------
+    ************************************
     The number of iterations the attack was run was : 100000
     The result of the attack was :
-    ----------------------------
+    ************************************
     Beth : 0.09979799469698866
     Bill : 0.04012515227833423
     Clair : 0.03310670466519659
@@ -87,7 +87,7 @@ simulation parameters)
     Ned : 0.08461957417217687
     Bob : 0.1679381718938153
     Stacey : 0.05519617474809045
-    ----------------------------
+    ************************************
 First that parameters of the attack are reiterated for clarity, additionally
 the actual values used for the attack are shown which should help quickly
 uncover any mistakes.
